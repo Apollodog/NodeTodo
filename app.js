@@ -28,7 +28,7 @@ app.get('/getTodos', (req, res) => {
     .collection(collection)
     .find({})
     .toArray((err, documents) => {
-      if (err) console.log(err);
+      if (err) console.log('GetTODOs error: ' + err);
       else {
         res.json(documents);
       }
@@ -49,7 +49,7 @@ app.put('/:id', (req, res) => {
       { $set: { todo: userInput.todo } },
       { returnOriginal: false },
       (err, result) => {
-        if (err) console.log(err);
+        if (err) console.log('Insert error: ' + err);
         else {
           res.json(result);
         }
