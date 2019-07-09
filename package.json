@@ -4,7 +4,7 @@
   "description": "Make sure to change into directory and run \"Npm install\" to download modules",
   "main": "app.js",
   "scripts": {
-    "start": "app.js"
+    "start": "app"
   },
   "keywords": [],
   "author": "",
