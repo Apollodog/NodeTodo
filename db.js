@@ -59,7 +59,7 @@ var initDb = function(callback) {
 };
 
 const state = {
-  db: null
+  mongodb: null
 };
 
 const connect = cb => {
@@ -74,7 +74,7 @@ const connect = cb => {
         return;
       }
 
-      db = conn;
+      mongodb = conn;
       dbDetails.databaseName = db.databaseName;
       dbDetails.url = mongoURLLabel;
       dbDetails.coll = db.collection;
