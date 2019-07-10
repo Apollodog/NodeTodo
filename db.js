@@ -7,6 +7,16 @@ const url = 'mongodb://mongodb:27017';
 // Options for mongoDB
 const mongoOptions = { useNewUrlParser: true };
 
+var mongodb = null,
+  dbDetails = new Object();
+
+var initDb = function(callback) {
+  if (mongoURL == null) return;
+
+  var mongodb = require('mongodb');
+  if (mongodb == null) return;
+};
+
 var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080,
   ip = process.env.IP || process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0',
   mongoURL = process.env.OPENSHIFT_MONGODB_DB_URL || process.env.MONGO_URL,
@@ -48,15 +58,6 @@ if (mongoURL == null) {
     mongoURL += mongoHost + ':' + mongoPort + '/' + mongoDatabase;
   }
 }
-var db = null,
-  dbDetails = new Object();
-
-var initDb = function(callback) {
-  if (mongoURL == null) return;
-
-  var mongodb = require('mongodb');
-  if (mongodb == null) return;
-};
 
 const state = {
   mongodb: null
