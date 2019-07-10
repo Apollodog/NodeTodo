@@ -12,7 +12,7 @@ const url =
   mongoUser +
   ':' +
   mongoPassword +
-  '@172.20.205.230:27017/crud_mongodb';
+  '@localhost:27017/crud_mongodb';
 // Options for mongoDB
 const mongoOptions = { useNewUrlParser: true };
 
