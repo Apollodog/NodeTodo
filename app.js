@@ -113,7 +113,7 @@ app.use((err, req, res, next) => {
   });
 });
 
-db.connect(err => {
+db.initDb(err => {
   // If err unable to connect to database
   // End application
   if (err) {

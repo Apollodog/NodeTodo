@@ -7,16 +7,6 @@ const url = 'mongodb://mongodb:27017';
 // Options for mongoDB
 const mongoOptions = { useNewUrlParser: true };
 
-var mongodb = null,
-  dbDetails = new Object();
-
-var initDb = function(callback) {
-  if (mongoURL == null) return;
-
-  var mongodb = require('mongodb');
-  if (mongodb == null) return;
-};
-
 var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080,
   ip = process.env.IP || process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0',
   mongoURL = process.env.OPENSHIFT_MONGODB_DB_URL || process.env.MONGO_URL,
@@ -58,32 +48,29 @@ if (mongoURL == null) {
     mongoURL += mongoHost + ':' + mongoPort + '/' + mongoDatabase;
   }
 }
+var db = null,
+  dbDetails = new Object();
 
-const state = {
-  mongodb: null
-};
+var initDb = function(callback) {
+  if (mongoURL == null) return;
 
-const connect = cb => {
-  // if state is not NULL
-  // Means we have connection already, call our CB
-  if (state.db) cb();
-  else {
-    // attempt to get database connection
-    mongodb.connect(mongoURL, function(err, conn) {
-      if (err) {
-        callback(err);
-        return;
-      }
+  var mongodb = require('mongodb');
+  if (mongodb == null) return;
 
-      mongodb = conn;
-      dbDetails.databaseName = db.databaseName;
-      dbDetails.url = mongoURLLabel;
-      dbDetails.coll = db.collection;
-      dbDetails.type = 'MongoDB';
+  mongodb.connect(mongoURL, function(err, conn) {
+    if (err) {
+      callback(err);
+      return;
+    }
 
-      console.log('Connected to MongoDB at: %s', mongoURL);
-    });
-  }
+    db = conn;
+    dbDetails.databaseName = db.databaseName;
+    dbDetails.url = mongoURLLabel;
+    dbDetails.coll = db.collection;
+    dbDetails.type = 'MongoDB';
+
+    console.log('Connected to MongoDB at: %s', mongoURL);
+  });
 };
 
 // returns OBJECTID object used to
@@ -93,9 +80,8 @@ const getPrimaryKey = _id => {
 
 // returns database connection
 const getDB = () => {
-  console.log('Paul - DB state is being returned, ' + state.db);
-  //return state.db;
-  return db;
+  console.log('Paul - DB state is being returned, ' + db);
+  return state.db;
 };
 
-module.exports = { getDB, connect, getPrimaryKey };
+module.exports = { getDB, initDb, getPrimaryKey };
