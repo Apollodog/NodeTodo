@@ -28,7 +28,7 @@ app.get('/getTodos', (req, res) => {
     .collection(collection)
     .find({})
     .toArray((err, documents) => {
-      if (err) console.log('Paul - GetTODOs error: ' + err);
+      if (err) console.log('Paul - GetTODOs error: ' + db.getDB + ' ' + err);
       else {
         res.json(documents);
       }
