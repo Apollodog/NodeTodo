@@ -37,6 +37,7 @@ const getPrimaryKey = _id => {
 
 // returns database connection
 const getDB = () => {
+  console.log('Paul - DB state is being returned, ' + state.db);
   return state.db;
 };
 

@@ -28,7 +28,7 @@ app.get('/getTodos', (req, res) => {
     .collection(collection)
     .find({})
     .toArray((err, documents) => {
-      if (err) console.log('GetTODOs error: ' + err);
+      if (err) console.log('Paul - GetTODOs error: ' + err);
       else {
         res.json(documents);
       }
@@ -49,7 +49,7 @@ app.put('/:id', (req, res) => {
       { $set: { todo: userInput.todo } },
       { returnOriginal: false },
       (err, result) => {
-        if (err) console.log('Insert error: ' + err);
+        if (err) console.log('Paul - Insert error: ' + err);
         else {
           res.json(result);
         }
@@ -75,7 +75,7 @@ app.post('/', (req, res, next) => {
         .collection(collection)
         .insertOne(userInput, (err, result) => {
           if (err) {
-            const error = new Error('Failed to insert Todo Document');
+            const error = new Error('Paul - Failed to insert Todo Document');
             error.status = 400;
             next(error);
           } else
