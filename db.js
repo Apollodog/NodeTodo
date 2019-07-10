@@ -3,8 +3,16 @@ const ObjectID = require('mongodb').ObjectID;
 // name of our database
 const dbname = 'crud_mongodb';
 // location of where our mongoDB database is located
+
+const mongoPassword = process.env['MONGODB_PASSWORD'];
+const mongoUser = process.env['MONGODB_USER'];
+
 const url =
-  'mongodb://user82E:DHfyOKCsXfrFUkCe@172.20.205.230:27017/crud_mongodb';
+  'mongodb://' +
+  mongoUser +
+  ':' +
+  mongoPassword +
+  '@172.20.205.230:27017/crud_mongodb';
 // Options for mongoDB
 const mongoOptions = { useNewUrlParser: true };
 
